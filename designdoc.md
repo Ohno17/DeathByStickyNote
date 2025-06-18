@@ -1,0 +1,9 @@
+- Oil and lumber in col#3 that are revealed to feed the buying of adhesive and paper
+    - Eventually run out, then space travel to strip other planets
+        - Some will have life on them, with which to be allies with or destroy for more resources
+- "A friend" who writes to you in the news
+    - This friend is against you scheme
+- the assets need to have a limit
+    - upgradable limit by special currency yomi replacement
+    - the assets need to become more interesting with a risk selector
+- Finsih machine machines

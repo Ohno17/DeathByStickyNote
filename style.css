@@ -1,0 +1,333 @@
+
+:root, :root.light {
+	--main-background: white;
+	--panel-background: #dddddd;
+	--text-color: black;
+}
+
+:root.dark {
+	--main-background: #111111;
+	--panel-background: #222222;
+	--text-color: #dddddd;
+}
+
+/* Main */
+
+body {
+	color: var(--text-color);
+	background-color: var(--main-background);
+	
+	font-family: "Trebuchet MS", "Calibri", sans-serif;
+}
+
+dialog {
+	border-radius: 10px;
+	
+	color: var(--text-color);
+	background-color: var(--main-background);
+}
+
+dialog::backdrop {
+	background-color: rgba(0, 0, 0, 0.3);
+}
+
+button {
+	margin: 2px;
+	border: 2px outset var(--text-color);
+	border-radius: 4px;
+	
+	color: var(--text-color);
+	background-color: var(--main-background);
+}
+
+button:disabled {
+	opacity: 0.5;
+}
+
+button:enabled:hover {
+	filter: brightness(90%);
+}
+
+button:enabled:active {
+	color: var(--main-background);
+	background-color: var(--text-color);
+	border-color: var(--main-background);
+	border-style: inset;
+}
+
+p {
+	margin: 2px;
+	padding: 0px;
+}
+
+h2, h3 {
+	border-bottom: 2px solid var(--text-color);
+	font-style: italic;
+}
+
+h2 {
+	font-size: 1.2rem;
+}
+
+h3 {
+	font-size: 1rem;
+}
+
+canvas {
+	width: 100%;
+	border: 1px solid var(--text-color);
+}
+
+progress {
+	accent-color: black;
+}
+
+#upper {
+	position: relative;
+	
+	padding: 10px;
+	background: var(--panel-background);
+	border-radius: 10px;
+	width: calc(100% - 20px);
+
+	margin-bottom: 5px;
+}
+
+#upper button {
+	display: flex;
+	position: absolute;
+	
+	top: 10px;
+	right: 10px;
+
+	width: 40px;
+	height: 40px;
+
+	padding: 0;
+
+	justify-content: center;
+	align-items: center;
+}
+
+:root #upper button::before, :root.light #upper button::before {
+	content: url(asset/gear.svg);
+}
+
+:root.dark #upper button::before {
+	content: url(asset/gear.svg);
+	filter: invert(100%);
+}
+
+#news {
+	padding: 10px;
+	background: var(--panel-background);
+	border-radius: 10px;
+	width: calc(100% - 20px);
+	height: 100%;
+
+	margin-top: 5px;
+
+	animation: appear-fall 1s;
+}
+
+#cols {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	height: 100%;
+
+	gap: 5px;
+
+	overflow-x: scroll;
+	padding-bottom: 15px;
+}
+
+@keyframes appear-fall {
+	0% {
+		opacity: 0;
+		transform: scale(1.4);
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+#cols>div {
+	padding: 10px;
+	height: calc(100% - 20px);
+	min-width: 30%;
+
+	background: var(--panel-background);
+	border-radius: 10px;
+
+	animation: appear-fall 1s;
+}
+
+div[data-unlocked="false"] {
+	display: none;
+}
+
+/* Contracts */
+
+@keyframes appear-flash {
+	0% {
+		opacity: 0;
+	}
+
+	5% {
+		opacity: 1;
+	}
+
+	10% {
+		opacity: 0;
+	}
+
+	15% {
+		opacity: 1;
+	}
+
+	20% {
+		opacity: 0;
+	}
+
+	25% {
+		opacity: 1;
+	}
+
+	30% {
+		opacity: 0;
+	}
+
+	35% {
+		opacity: 1;
+	}
+
+	40% {
+		opacity: 0;
+	}
+
+	45% {
+		opacity: 1;
+	}
+}
+
+#contracts {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	justify-content: space-between;
+}
+
+#contracts>button {
+	padding: 10px;
+	text-align: center;
+	border-radius: 10px;
+
+	animation: appear-flash 1s;
+}
+
+#contracts>button>span {
+	font-weight: bold;
+}
+
+#contracts>button>span::after {
+	content: " - ";
+}
+
+/* News */
+
+#news article {
+	border: 1px solid var(--text-color);
+
+	margin: 1em;
+	padding: 1em;
+	padding-top: 0;
+}
+
+#news article > hgroup > h4 {
+	font-size: 1.2em;
+}
+
+#news article > hgroup {
+	margin-bottom: 1em;
+}
+
+#news article > hgroup > p::before {
+	content: "By: ";
+}
+
+#news article > hgroup > p {
+	margin-left: 1em;
+}
+
+#news article > p > span[data-selected=true] {
+	text-decoration: line-through;
+	font-weight: bold;
+}
+
+#news article > p > span[data-selected=false]:hover {
+	cursor: pointer;
+	text-decoration: line-through;
+	color: var(--panel-background);
+	background: var(--text-color);
+}
+
+#news article > p > span[data-selected=true]:hover {
+	cursor: pointer;
+	text-decoration: none;
+	color: var(--panel-background);
+	background: var(--text-color);
+}
+
+#news article[data-completed=true] {
+	border: 1px dashed var(--text-color);
+	pointer-events: none;
+}
+
+/* Representatives */
+
+#reps > div {
+	margin-bottom: 5px;
+	padding: 6px;
+
+	border: 2px outset var(--text-color);
+	border-radius: 20px;
+
+	animation: appear-flash 1s;
+}
+
+#reps > div progress {
+	width: 100%;
+}
+
+#reps > div button {
+	float: right;
+}
+
+#reps > div > p span {
+	font-weight: bold;
+}
+
+#reps > div > p span::after {
+	content: " - ";
+}
+
+#reps-none {
+	text-align: center;
+	border-radius: 0px !important;
+	border-style: dotted !important;
+}
+
+/* Querries */
+
+@media (prefers-reduced-motion: reduce) {
+	#contracts>button {
+		animation: none;
+	}
+
+	#cols>div {
+		animation: none;
+	}
+}

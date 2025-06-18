@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Death by Sticky Note</title>
+	<link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+	<script>
+		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			document.documentElement.className = "dark";
+		}
+	</script>
+
+	<dialog id="settings">
+		<h2>
+			Settings
+			<button title="Close Settings" aria-label="Close Settings" onclick="closeSettings()">X</button>
+		</h2>
+		
+		<input id="darkmode" type="checkbox" onchange="toggleDarkmode(this)"/><label for="darkmode">Dark mode</label>
+	</dialog>
+	
+	<main>
+
+		<div id="upper">
+			<button title="Settings" aria-label="Settings" onclick="openSettings()"></button>
+			
+			<h4>Sticky Notes Produced: <noscript>(This game requires Javascript enabled to play.)</noscript></h4>
+			<h1 id="displayproduced">0</h1>
+		</div>
+
+		<div id="cols">
+			<div>
+				<button onclick="produceStickynote()">Handcraft Sticky Note</button><br>
+
+				<section>
+					<h2>Business</h2>
+
+					<p>Funds: $<span id="displayfunds">0</span></p>
+					<p>Profit per Second: $<span id="displaypro">0</span></p>
+					<p>Sticky Notes in Storage: <span id="displaystored">0</span></p>
+					<p>Public Demand for Sticky Notes: <span id="displaydemand">0</span>%</p>
+
+					<button onclick="changeStickynotePrice(-0.01)">Decrease</button>
+					<button onclick="changeStickynotePrice(0.01)">Increase</button>
+					<span>Price of Sticky Notes:
+						$<span id="displaystickyprice">0</span>
+					</span><br>
+
+					<button onclick="improveMarketing()">Improve Marketing</button>
+					<label id="purchasema">0</label> levels of marketing
+					<p>Cost: $<span id="purchasemc">0</span></p>
+				</section>
+
+				<section>
+					<h2>Production</h2>
+
+					<div id="autosupplier" data-unlocked="false">
+						<button onclick="toggleAutoSupplier()">Auto Supplier</button>
+						<label id="purchaseass">OFF</label>
+					</div>
+
+					<button onclick="purchasePaper()">Purchase Paper Rolls</button>
+					<label id="purchasepa">0</label> m<sup>2</sup>
+					<p>Cost: $<span id="purchasepc">0</span></p>
+
+					<button onclick="purchaseAdhesive()">Purchase Adhesive Bottles</button>
+					<label id="purchaseaa">0</label> liters
+					<p>Cost: $<span id="purchaseac">0</span></p>
+				</section>
+
+				<section>
+					<h2>Manufacturing</h2>
+
+					<button onclick="purchaseStickyNoteMachine()">Purchase Sticky Note Machine</button>
+					<label id="purchasesna">0</label> machines
+					<p>Cost: $<span id="purchasesnc">0</span></p>
+
+					<div id="massivestickynotemachine" data-unlocked="false">
+						<button onclick="purchaseMassiveStickyNoteMachine()">Purchase Massive Sticky Note Machine</button>
+						<label id="purchasemsna">0</label> machines
+						<p>Cost: $<span id="purchasemsnc">0<span></p>
+					</div>
+					
+					<div id="machinemachine" data-unlocked="false">
+						<button onclick="purchaseStickyNoteMachineMachine()">Purchase "Sticky Note Machine" Machine</button>
+						<label id="purchasesnma">0</label> machines
+						<p>Cost: $<span id="purchasesnmc">0<span></p>
+
+						<button onclick="purchaseMassiveStickyNoteMachineMachine()">Purchase "Massive Sticky Note Machine" Machine</button>
+						<label id="purchasemsnma">0</label> machines
+						<p>Cost: $<span id="purchasemsnmc">0<span></p>
+					</div>
+				</section>
+
+			</div>
+
+			<div id="columntwo" data-unlocked="false">
+				<section>
+					<h2>Power</h2>
+
+					<p>Public Perception Goal: <span id="displayppgoal">0</span> Sticky Notes Made</p>
+					<p>Public Perception Points: <span id="displaypppoints">0</span></p>
+
+					<button id="spreadbutton" onclick="purchaseSpread()">Increase Spread</button>
+					<label id="displayspread">0</label><br>
+
+					<button id="reachbutton" onclick="purchaseReach()">Increase Reach</button>
+					<label id="displayreach">0</label>
+
+					<p>
+						Votes: <span id="displayvotes">0</span> / <span id="displayrealreach">0</span>
+						<progress id="displayvotesbar" value="0" max="1"></progress>
+					</p>
+
+					<p>Power: <span id="displaypower">0</span> units</p>
+				</section>
+				
+				<section>
+					<div id="representatives" data-unlocked="false">
+						<h2>Representatives</h3>
+
+						<div id="reps">
+							<div id="reps-none">None</div>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h2>Contracts</h2>
+
+					<div id="contracts">
+
+					</div>
+				</section>
+			</div>
+
+			<div id="columnthree" data-unlocked="false">
+				<section>
+					<h2>Resources</h2>
+
+					<p>Oil: </p>
+					<p>Lumber: </p>
+				</section>
+
+				<section>
+					<div id="assets" data-unlocked="false">
+						<h2>Assets</h2>
+
+						<canvas id="assetsgraph"></canvas>
+
+						<p>Equity: $<span id="displayequity">0</span></p>
+						<button onclick="investAssets()">Invest $<span id="displayinvest">0</span></button>
+						<button onclick="liquidateAssets()">Liquidate</button>
+					</div>
+				</section>
+			</div>
+		</div>
+
+		<div id="news" data-unlocked="false">
+			<section>
+				<h2>News</h2>
+
+				<div id="newsarticles"></div>
+			</section>
+		</div>
+	</main>
+
+	<script async src="settings.js"></script>
+
+	<script defer src="intervals.js"></script>
+	<script defer src="representatives.js"></script>
+	<script defer src="contracts.js"></script>
+	<script defer src="news.js"></script>
+	<script defer src="display.js"></script>
+	<script defer src="script.js"></script>
+	<script defer src="file.js"></script>
+
+</body>
+
+</html>
